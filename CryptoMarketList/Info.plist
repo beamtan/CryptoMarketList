@@ -4,10 +4,15 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SFMono-Medium.otf</string>
 		<string>SFMono-Bold.otf</string>
 		<string>SFMono-Regular.otf</string>
-		<string>SFMono-SemiBold.otf</string>
+		<string>SFMono-Semibold.otf</string>
 		<string>SFMono-Light.otf</string>
+		<string>CircularStd-Black.ttf</string>
+		<string>CircularStd-Medium.ttf</string>
+		<string>CircularStd-Book.ttf</string>
+		<string>CircularStd-Bold.ttf</string>
 	</array>
 </dict>
 </plist>
