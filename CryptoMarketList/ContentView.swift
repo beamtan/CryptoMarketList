@@ -9,14 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .font(Font.custom("SFMono-Bold", size: 20))
+        TabView {
+            Group {
+                MarketWatchView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+            }
+            .toolbarBackground(.white, for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            
+            Group {
+                MarketWatchView()
+                    .tabItem {
+                        Label("Market", systemImage: "chart.xyaxis.line")
+                    }
+            }
+            .toolbarBackground(.white, for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
         }
-        .padding()
     }
 }
 
