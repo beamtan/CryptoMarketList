@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EF0C6D9F2CC4251700A37BF5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EF0C6D9E2CC4251700A37BF5 /* Alamofire */; };
+		EF0C6DA22CC4315000A37BF5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EF0C6DA12CC4315000A37BF5 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EF0C6D022CC2A82C00A37BF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF0C6DA22CC4315000A37BF5 /* Kingfisher in Frameworks */,
+				EF0C6D9F2CC4251700A37BF5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +98,7 @@
 				EF0C6CF32CC2A82700A37BF5 /* CryptoMarketList */,
 				EF0C6D042CC2A82C00A37BF5 /* CryptoMarketListTests */,
 				EF0C6D0E2CC2A82C00A37BF5 /* CryptoMarketListUITests */,
+				EF0C6D9D2CC4251700A37BF5 /* Frameworks */,
 				EF0C6CF22CC2A82700A37BF5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +111,13 @@
 				EF0C6D0B2CC2A82C00A37BF5 /* CryptoMarketListUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF0C6D9D2CC4251700A37BF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +140,8 @@
 			);
 			name = CryptoMarketList;
 			packageProductDependencies = (
+				EF0C6D9E2CC4251700A37BF5 /* Alamofire */,
+				EF0C6DA12CC4315000A37BF5 /* Kingfisher */,
 			);
 			productName = CryptoMarketList;
 			productReference = EF0C6CF12CC2A82700A37BF5 /* CryptoMarketList.app */;
@@ -208,6 +225,10 @@
 			);
 			mainGroup = EF0C6CE82CC2A82700A37BF5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF0C6D952CC4108300A37BF5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EF0C6DA02CC4314200A37BF5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF0C6CF22CC2A82700A37BF5 /* Products */;
 			projectDirPath = "";
@@ -567,6 +588,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF0C6D952CC4108300A37BF5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.0;
+			};
+		};
+		EF0C6DA02CC4314200A37BF5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF0C6D9E2CC4251700A37BF5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0C6D952CC4108300A37BF5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		EF0C6DA12CC4315000A37BF5 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0C6DA02CC4314200A37BF5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF0C6CE92CC2A82700A37BF5 /* Project object */;
 }
