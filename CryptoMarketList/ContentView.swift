@@ -11,10 +11,12 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Group {
-                MarketWatchView()
-                    .tabItem {
-                        Label("Home", systemImage: "house")
-                    }
+                NavigationStack {
+                    MarketWatchView()
+                }
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
             }
             .toolbarBackground(.white, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
