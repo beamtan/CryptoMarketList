@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EF0C6D9F2CC4251700A37BF5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EF0C6D9E2CC4251700A37BF5 /* Alamofire */; };
 		EF0C6DA22CC4315000A37BF5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EF0C6DA12CC4315000A37BF5 /* Kingfisher */; };
+		EF0C6E202CC5933800A37BF5 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF0C6E1F2CC5933800A37BF5 /* SwifterSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF0C6E202CC5933800A37BF5 /* SwifterSwift in Frameworks */,
 				EF0C6DA22CC4315000A37BF5 /* Kingfisher in Frameworks */,
 				EF0C6D9F2CC4251700A37BF5 /* Alamofire in Frameworks */,
 			);
@@ -142,6 +144,7 @@
 			packageProductDependencies = (
 				EF0C6D9E2CC4251700A37BF5 /* Alamofire */,
 				EF0C6DA12CC4315000A37BF5 /* Kingfisher */,
+				EF0C6E1F2CC5933800A37BF5 /* SwifterSwift */,
 			);
 			productName = CryptoMarketList;
 			productReference = EF0C6CF12CC2A82700A37BF5 /* CryptoMarketList.app */;
@@ -228,6 +231,7 @@
 			packageReferences = (
 				EF0C6D952CC4108300A37BF5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				EF0C6DA02CC4314200A37BF5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				EF0C6E1E2CC5932600A37BF5 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF0C6CF22CC2A82700A37BF5 /* Products */;
@@ -606,6 +610,14 @@
 				minimumVersion = 8.1.0;
 			};
 		};
+		EF0C6E1E2CC5932600A37BF5 /* XCRemoteSwiftPackageReference "SwifterSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwifterSwift/SwifterSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -618,6 +630,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EF0C6DA02CC4314200A37BF5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		EF0C6E1F2CC5933800A37BF5 /* SwifterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0C6E1E2CC5932600A37BF5 /* XCRemoteSwiftPackageReference "SwifterSwift" */;
+			productName = SwifterSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

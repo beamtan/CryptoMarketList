@@ -22,7 +22,7 @@ class CoinGeckoService: Service {
         let parameters: [String: Any] = [
             "vs_currency" : "usd",
             "precision" : "2",
-            "per_page" : 10,
+            "per_page" : 20,
             "sparkline" : "true",
             "order" : "market_cap_desc",
         ]

@@ -30,7 +30,6 @@ class MarketWatchViewModel: ObservableObject {
                 guard let self else { return }
                 
                 self.coins = coins
-                print(coins)
             })
             .store(in: &cancellables)
     }

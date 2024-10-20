@@ -18,20 +18,29 @@ struct MarketWatchView: View {
                 
                 Text("Trending Coins")
                     .font(Font.custom("CircularStd-Bold", size: 20))
+                    .foregroundColor(Color("212529", bundle: .main))
                     .frame(maxWidth: .infinity, maxHeight: 20, alignment: .leading)
                     .padding(.top, 32)
                 
-                VStack {
+                LazyVStack {
                     ForEach(viewModel.coins) { coin in
-                        CoinCardView(
-                            imageUrl: coin.image ?? "",
-                            graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
-                            coinName: coin.name ?? "",
-                            coinSymbol: coin.symbol ?? "",
-                            price: coin.currentPrice ?? 0.0,
-                            percentChange: coin.priceChange24H ?? 0.0,
-                            isPositivePricePercentChange: coin.isPositivePriceChange24H
-                        )
+                        NavigationLink(
+                            destination: CoinDetailView(
+                                coin: coin,
+                                graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
+                                isPositivePricePercentChange: coin.isPositivePriceChange24H
+                            )
+                        ) {
+                            CoinCardView(
+                                imageUrl: coin.image ?? "",
+                                graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
+                                coinName: coin.name ?? "",
+                                coinSymbol: coin.symbol ?? "",
+                                price: coin.currentPrice ?? 0.0,
+                                percentChange: coin.priceChange24H ?? 0.0,
+                                isPositivePricePercentChange: coin.isPositivePriceChange24H
+                            )
+                        }
                     }
                 }
                 .padding(.top, 16)
@@ -43,8 +52,10 @@ struct MarketWatchView: View {
             .background(Color("F8F9FA", bundle: .main))
             
         }
-        .background(Color("F8F9FA", bundle: .main))
+        .background(Color("F8F9FA"))
         .onAppear {
+            guard viewModel.coins.isEmpty else { return }
+            
             viewModel.inquiryCoinList()
         }
     }
@@ -101,11 +112,11 @@ struct CoinCardView: View {
     @State var imageUrl: String
     @State var graphData: [Double]
     
-    @State var coinName: String = "Bitcoin"
-    @State var coinSymbol: String = "BTC"
+    @State var coinName: String
+    @State var coinSymbol: String
     
-    @State var price: Double = 2509.75
-    @State var percentChange: Double = 9.77
+    @State var price: Double
+    @State var percentChange: Double
     
     @State var isPositivePricePercentChange: Bool
     
@@ -124,6 +135,7 @@ struct CoinCardView: View {
             VStack(spacing: 8) {
                 Text(coinName)
                     .font(Font.custom("CircularStd-Book", size: 16))
+                    .foregroundStyle(Color("212529"))
                     .frame(maxWidth: .infinity, maxHeight: 12, alignment: .leading)
                 
                 Text(coinSymbol.uppercased())
@@ -136,17 +148,18 @@ struct CoinCardView: View {
             Spacer()
             
             GraphView(
-                isPositivePricePercentChange: isPositivePricePercentChange,
+                graphLineColor: isPositivePricePercentChange ? Color.green : Color.red,
                 prices: graphData
             )
-                .frame(width: 50, height: 25, alignment: .trailing)
+            .frame(width: 50, height: 25, alignment: .trailing)
             
             VStack(spacing: 8) {
                 Text("$ \(price.currencyFormatted(digits: 2))")
                     .font(Font.custom("CircularStd-Book", size: 16))
+                    .foregroundStyle(Color("212529"))
                     .frame(maxWidth: .infinity, maxHeight: 12, alignment: .trailing)
                 
-                Text(isPositivePricePercentChange ? "+\(percentChange)%" : "\(percentChange.currencyFormatted(digits: 2))%")
+                Text(isPositivePricePercentChange ? "+\(percentChange.currencyFormatted(digits: 2))%" : "\(percentChange.currencyFormatted(digits: 2))%")
                     .font(Font.custom("CircularStd-Medium", size: 12))
                     .foregroundStyle(isPositivePricePercentChange ? Color.green : Color.red)
                     .frame(maxWidth: .infinity, maxHeight: 12, alignment: .trailing)
@@ -169,8 +182,8 @@ struct CoinCardView: View {
 // MARK: - Graph
 
 struct GraphView: View {
-    let isPositivePricePercentChange: Bool
-    var prices: [Double]
+    let graphLineColor: Color
+    let prices: [Double]
     
     var body: some View {
         GeometryReader { geometry in
@@ -192,11 +205,10 @@ struct GraphView: View {
                 }
             }
             .stroke(
-                isPositivePricePercentChange ? Color.green : Color.red,
+                graphLineColor,
                 lineWidth: 2
             )
         }
-        .frame(width: 50, height: 25)
     }
 }
 
