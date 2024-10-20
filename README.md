@@ -20,3 +20,8 @@ Responsive UI: Seamless and adaptive user interface.
 
 <!-- Image 1 -->
 <img src="https://github.com/user-attachments/assets/bb434281-53c1-4462-97a8-7569320f530f" alt="Simulator Screenshot - iPhone 16 Pro - 2024-10-18 at 00 03 08" width="300" style="padding:10px;"/>
+
+## Credits
+
+- **API:** https://www.coingecko.com/
+- **UI Design:** https://www.figma.com/design/K0w1ixoUbNWx5n7140KOT3/Crypto-Trading-App-UI-Kit-(Community)?m=auto&t=mQyCn9iANzKBwmJm-1
