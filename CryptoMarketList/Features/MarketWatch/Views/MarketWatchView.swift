@@ -12,47 +12,53 @@ struct MarketWatchView: View {
     @StateObject private var viewModel = MarketWatchViewModel()
     
     var body: some View {
-        ScrollView {
-            VStack {
-                MarketWatchWelcomeHeaderView()
-                
-                Text("Trending Coins")
-                    .font(Font.custom("CircularStd-Bold", size: 20))
-                    .foregroundColor(Color("212529", bundle: .main))
-                    .frame(maxWidth: .infinity, maxHeight: 20, alignment: .leading)
-                    .padding(.top, 32)
-                
-                LazyVStack {
-                    ForEach(viewModel.coins) { coin in
-                        NavigationLink(
-                            destination: CoinDetailView(
-                                coin: coin,
-                                graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
-                                isPositivePricePercentChange: coin.isPositivePriceChange24H
-                            )
-                        ) {
-                            CoinCardView(
-                                imageUrl: coin.image ?? "",
-                                graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
-                                coinName: coin.name ?? "",
-                                coinSymbol: coin.symbol ?? "",
-                                price: coin.currentPrice ?? 0.0,
-                                percentChange: coin.priceChange24H ?? 0.0,
-                                isPositivePricePercentChange: coin.isPositivePriceChange24H
-                            )
+        ZStack {
+            ScrollView {
+                VStack {
+                    MarketWatchWelcomeHeaderView()
+                    
+                    Text("Trending Coins")
+                        .font(Font.custom("CircularStd-Bold", size: 20))
+                        .foregroundColor(Color("212529", bundle: .main))
+                        .frame(maxWidth: .infinity, maxHeight: 20, alignment: .leading)
+                        .padding(.top, 32)
+                    
+                    LazyVStack {
+                        ForEach(viewModel.coins) { coin in
+                            NavigationLink(
+                                destination: CoinDetailView(
+                                    coin: coin,
+                                    graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
+                                    isPositivePricePercentChange: coin.isPositivePriceChange24H
+                                )
+                            ) {
+                                CoinCardView(
+                                    imageUrl: coin.image ?? "",
+                                    graphData: (coin.sparkLineIn7D?.price ?? []).suffix(20),
+                                    coinName: coin.name ?? "",
+                                    coinSymbol: coin.symbol ?? "",
+                                    price: coin.currentPrice ?? 0.0,
+                                    percentChange: coin.priceChange24H ?? 0.0,
+                                    isPositivePricePercentChange: coin.isPositivePriceChange24H
+                                )
+                            }
                         }
                     }
+                    .padding(.top, 16)
+                    
+                    Spacer()
                 }
+                .padding(.horizontal, 16)
                 .padding(.top, 16)
-                
-                Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("F8F9FA", bundle: .main))
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("F8F9FA", bundle: .main))
+            .background(Color("F8F9FA"))
             
+            if $viewModel.coins.isEmpty {
+                ProgressView()
+            }
         }
-        .background(Color("F8F9FA"))
         .onAppear {
             guard viewModel.coins.isEmpty else { return }
             
