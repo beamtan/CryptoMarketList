@@ -79,18 +79,12 @@ struct CoinDetailView: View {
                             .padding(.leading, 12)
                         
                         Spacer()
-                        
                     }
                     .frame(maxWidth: .infinity, maxHeight: 26)
                     .padding(.horizontal, 16)
-                    .padding(.top, 16)
+                    .padding(.vertical, 16)
                     
-                    GraphView(
-                        graphLineColor: Color.blue,
-                        prices: graphData
-                    )
-                    .frame(maxWidth: .infinity, minHeight: 320)
-                    .padding(.top, 18)
+                    GraphViewWithLabel(graphData: graphData)
                     
                     StatisticsView(coin: coin)
                     
@@ -107,6 +101,9 @@ struct StatisticsView: View {
     let coin: MarketWatchModel?
     
     var body: some View {
+        let rangeFromLowestToCurrentPrice: Double = max(1, ((coin?.currentPrice ?? 0.0) - (coin?.low24H ?? 0.0)))
+        let percentOfCurrentPriceCompareToHighest: Double = min(1, rangeFromLowestToCurrentPrice / (coin?.high24H ?? 0.0))
+        
         VStack {
             Rectangle()
                 .foregroundStyle(Color("DFE2E4"))
@@ -137,9 +134,11 @@ struct StatisticsView: View {
         .padding(.top, 24)
         
         VStack {
-            Rectangle()
-                .foregroundStyle(Color("DFE2E4"))
-                .cornerRadius(8)
+            ProgressView(
+                value: percentOfCurrentPriceCompareToHighest,
+                total: 1
+            )
+                .tint(Color("6C757D"))
         }
         .frame(maxWidth: .infinity, maxHeight: 6)
         .padding(.horizontal, 16)
@@ -293,14 +292,86 @@ struct StatisticsView: View {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
         }
+    }
+}
+
+struct GraphViewWithLabel: View {
+    let graphData: [Double]
+    
+    var body: some View {
         
-        VStack {
-            Rectangle()
-                .foregroundStyle(Color("DFE2E4"))
+        HStack(alignment: .bottom) {
+            GeometryReader { geometry in
+                let maxValue: Double = graphData.max() ?? 1
+                let minValue: Double = graphData.min() ?? 1
+                
+                let eachStepOfXLength: CGFloat = geometry.size.width / CGFloat(graphData.count - 1)
+                
+                let indexOfMaxValue: Int = graphData.firstIndex(where: { $0 == maxValue }) ?? 0
+                let indexOfMinValue: Int = graphData.firstIndex(where: { $0 == minValue }) ?? 0
+                
+                let paddingOfMaxValue: CGFloat = CGFloat(indexOfMaxValue) * eachStepOfXLength
+                let paddingOfMinValue: CGFloat = CGFloat(indexOfMinValue) * eachStepOfXLength
+                
+                /// Prevent padding push too much off horizontal screen
+                
+                let isInTheRightEdgeScreen: Bool = indexOfMaxValue >= (graphData.count - 2)
+                let isInTheLeftEdgeScreen: Bool = indexOfMaxValue <= 2
+                
+                /// Choose padding for most align to the price label
+                
+                let defaultAlignPadding: CGFloat = isInTheLeftEdgeScreen ? 0 : paddingOfMaxValue - CGFloat(eachStepOfXLength * 1)
+                let preventOffScreenToRightPadding: CGFloat = paddingOfMaxValue - CGFloat(eachStepOfXLength * 2)
+                
+                let padding: CGFloat = isInTheRightEdgeScreen ? preventOffScreenToRightPadding : defaultAlignPadding
+                
+                Text("$" + maxValue.currencyFormatted(digits: 2))
+                    .font(Font.custom("CircularStd-Book", size: 12))
+                    .foregroundStyle(Color("6C757D"))
+                    .padding(.leading, padding)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: 1)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 20)
+        .frame(maxWidth: .infinity, minHeight: 20)
+        
+        GraphView(
+            graphLineColor: Color("0063F5"),
+            prices: graphData
+        )
+        .frame(maxWidth: .infinity, minHeight: 320)
+        .padding(.vertical, 8)
+        
+        HStack {
+            GeometryReader { geometry in
+                let maxValue: Double = graphData.max() ?? 1
+                let minValue: Double = graphData.min() ?? 1
+                
+                let eachStepOfXLength: CGFloat = geometry.size.width / CGFloat(graphData.count - 1)
+                
+                let indexOfMaxValue: Int = graphData.firstIndex(where: { $0 == maxValue }) ?? 0
+                let indexOfMinValue: Int = graphData.firstIndex(where: { $0 == minValue }) ?? 0
+                
+                let paddingOfMaxValue: CGFloat = CGFloat(indexOfMaxValue) * eachStepOfXLength
+                let paddingOfMinValue: CGFloat = CGFloat(indexOfMinValue) * eachStepOfXLength
+                
+                /// Prevent padding push too much off horizontal screen
+                
+                let isInTheRightEdgeScreen: Bool = indexOfMinValue >= (graphData.count - 2)
+                let isInTheLeftEdgeScreen: Bool = indexOfMinValue <= 2
+                
+                /// Choose padding for most align to the price label
+                
+                let defaultAlignPadding: CGFloat = isInTheLeftEdgeScreen ? 0 : paddingOfMinValue - CGFloat(eachStepOfXLength * 1)
+                let preventOffScreenToRightPadding: CGFloat = paddingOfMinValue - CGFloat(eachStepOfXLength * 2)
+                
+                let padding: CGFloat = isInTheRightEdgeScreen ? preventOffScreenToRightPadding : defaultAlignPadding
+                
+                Text("$" + minValue.currencyFormatted(digits: 2))
+                    .font(Font.custom("CircularStd-Book", size: 12))
+                    .foregroundStyle(Color("6C757D"))
+                    .padding(.leading, padding)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 20)
     }
 }
 
@@ -308,9 +379,7 @@ struct StatisticsView: View {
     let sampleGraphData: [Double] = [
         48000, 48500, 49000, 49500, 50000, 50500, 51000,
         51500, 52000, 52500, 53000, 53500, 54000, 54500,
-        55000, 55500, 56000, 56500, 57000, 57500, 58000,
-        58500, 59000, 59500, 60000, 60500, 61000, 61500,
-        62000, 62500, 63000, 63500, 64000, 64500, 65000
+        55000, 55500, 56000, 56500, 57000, 57500,
     ].shuffled()
     
     let isPositiveChange = true
