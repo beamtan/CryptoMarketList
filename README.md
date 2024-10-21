@@ -19,7 +19,10 @@ Responsive UI: Seamless and adaptive user interface.
 ## Project Screen Shot(s)  
 
 <!-- Image 1 -->
-<img src="https://github.com/user-attachments/assets/bb434281-53c1-4462-97a8-7569320f530f" alt="Simulator Screenshot - iPhone 16 Pro - 2024-10-18 at 00 03 08" width="300" style="padding:10px;"/>
+<img src="https://github.com/user-attachments/assets/5c1c100f-4de3-4bb7-9e06-e5c011932625" alt="Simulator Screenshot - iPhone 16 Pro - 2024-10-18 at 00 03 08" width="300" style="padding:10px;"/>
+
+<!-- Image 2 -->
+<img src="https://github.com/user-attachments/assets/55b8658a-542d-4d0d-89fa-1d99a57776c4" alt="Simulator Screenshot - iPhone 16 Pro - 2024-10-18 at 00 03 08" width="300" style="padding:10px;"/>
 
 ## Credits
 
