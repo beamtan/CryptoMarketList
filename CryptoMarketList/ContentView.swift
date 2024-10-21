@@ -12,27 +12,6 @@ struct ContentView: View {
         NavigationStack {
             MarketWatchView()
         }
-//        TabView {
-//            Group {
-//                NavigationStack {
-//                    MarketWatchView()
-//                }
-//                .tabItem {
-//                    Label("Home", systemImage: "house")
-//                }
-//            }
-//            .toolbarBackground(.white, for: .tabBar)
-//            .toolbarBackground(.visible, for: .tabBar)
-//            
-//            Group {
-//                MarketWatchView()
-//                    .tabItem {
-//                        Label("Market", systemImage: "chart.xyaxis.line")
-//                    }
-//            }
-//            .toolbarBackground(.white, for: .tabBar)
-//            .toolbarBackground(.visible, for: .tabBar)
-//        }
     }
 }
 
